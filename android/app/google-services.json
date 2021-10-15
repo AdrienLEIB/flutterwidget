@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "580953752203",
+    "project_id": "ynovprofil-61704",
+    "storage_bucket": "ynovprofil-61704.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580953752203:android:3b7516f0d0fa91f4a28a8e",
+        "android_client_info": {
+          "package_name": "com.example.widget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "580953752203-s68856vtdrpdpmj3idb15cr9lu53vrl8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIjcD06ahe-QxHLg68tM4Sv7hrLRekKGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "580953752203-s68856vtdrpdpmj3idb15cr9lu53vrl8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
