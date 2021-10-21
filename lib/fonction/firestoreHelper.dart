@@ -60,4 +60,17 @@ class firestoreHelper{
   }
 
 
+
+  Future<List<Utilisateur>> getUtilisateurs() async{
+
+    List<Utilisateur> utilisateurs = [];
+    QuerySnapshot snaps = await firestore_user.get();
+    print(snaps);
+    print('__________________ tototo');
+    return utilisateurs;
+
+  }
+
+
+
 }

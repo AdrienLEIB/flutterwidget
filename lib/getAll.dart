@@ -1,0 +1,69 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:widget/fonction/firestoreHelper.dart';
+import 'package:widget/model/Utilisateur.dart';
+
+
+
+
+class getAllPage extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return getAllPageState();
+  }
+
+}
+
+class getAllPageState extends State<getAllPage> {
+  List<Utilisateur> utilisateurs = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Information User'),
+      ),
+      body: bodyPage(),
+    );
+  }
+
+
+  Widget bodyPage() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: firestoreHelper().firestore_user.snapshots(),
+      builder: ( context,  snapshot){
+        if (snapshot.hasData){
+          return ListView.builder(
+          itemCount: snapshot.data!.docs.length,
+            itemBuilder: (BuildContext context, int index){
+                return Container(
+
+                  child : Column(
+                    children:
+                      <Widget>[
+                        Text(' Nom : ${snapshot.data!.docs[index]['nom']}'),
+                        Text(' Prenom : ${snapshot.data!.docs[index]['prenom']}'),
+                        Text('_______________________'),
+                  ]
+                  )
+                );
+            }
+          );
+        }
+        else{
+          return Text(' Il y a r');
+        }
+      },
+
+    );
+  }
+
+}

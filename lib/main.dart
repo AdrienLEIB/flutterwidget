@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:widget/fonction/firestoreHelper.dart';
+import 'package:widget/getAll.dart';
 import 'package:widget/informationUser.dart';
 import 'package:widget/register.dart';
 import 'package:widget/login.dart';
+import 'package:widget/getAll.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -417,6 +419,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   ));
                 },
                 child: Text('Register'),
+              ),
+              ElevatedButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (BuildContext context){ return getAllPage();}
+                  ));
+                },
+                child: Text('Tous les Users'),
               )
 
             ],
