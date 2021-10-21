@@ -45,7 +45,7 @@ class getAllPageState extends State<getAllPage> {
           itemCount: snapshot.data!.docs.length,
             itemBuilder: (BuildContext context, int index){
             Utilisateur utilisateur = Utilisateur(snapshot.data!.docs[index]);
-                return Container(
+                return InkWell(
 
                   child : Column(
                     children:
@@ -54,7 +54,10 @@ class getAllPageState extends State<getAllPage> {
                         Text(' Prenom : ${utilisateur.prenom}'),
                         Text('_______________________'),
                   ]
-                  )
+                  ),
+                  onTap: (){
+                    print('${utilisateur.identifiant}');
+                  },
                 );
             }
           );
