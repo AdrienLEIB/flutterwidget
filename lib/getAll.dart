@@ -44,13 +44,14 @@ class getAllPageState extends State<getAllPage> {
           return ListView.builder(
           itemCount: snapshot.data!.docs.length,
             itemBuilder: (BuildContext context, int index){
+            Utilisateur utilisateur = Utilisateur(snapshot.data!.docs[index]);
                 return Container(
 
                   child : Column(
                     children:
                       <Widget>[
-                        Text(' Nom : ${snapshot.data!.docs[index]['nom']}'),
-                        Text(' Prenom : ${snapshot.data!.docs[index]['prenom']}'),
+                        Text(' Nom : ${utilisateur.nom}'),
+                        Text(' Prenom : ${utilisateur.prenom}'),
                         Text('_______________________'),
                   ]
                   )
