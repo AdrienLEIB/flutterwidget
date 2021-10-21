@@ -23,7 +23,7 @@ class registerState extends State<register>{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Deuxième page'),
+        title: Text('t3 page'),
       ),
       body: bodyPage(),
     );

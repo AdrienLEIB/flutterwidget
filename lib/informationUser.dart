@@ -34,14 +34,14 @@ class informationUserState extends State<informationUser>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    identifiant=firestoreHelper().getIdentifiant();
+    identifiant=firestoreHelper().getItendifiant();
   }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Deuxième page'),
+        title: Text('Information de l\'user'),
       ),
       body: bodyPage(),
     );
@@ -50,192 +50,194 @@ class informationUserState extends State<informationUser>{
 
 
   Widget bodyPage(){
-    return Container(
-      padding: EdgeInsets.all(20),
-      child: Column(
+    return SingleChildScrollView(child:
+        Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
 
-        children: [
-          //sexe
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Femme'),
-              Switch.adaptive(
-                  value: isMan,
-                  onChanged: (bool value){
-                    setState(() {
-                      isMan = value;
-                    });
-                  }
+              //sexe
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Femme'),
+                  Switch.adaptive(
+                      value: isMan,
+                      onChanged: (bool value){
+                        setState(() {
+                          isMan = value;
+                        });
+                      }
+                  ),
+                  Text('Homme')
+
+                ],
               ),
-              Text('Homme')
+
+              //nom
+              TextField(
+                onChanged: (String value){
+                  setState(() {
+
+                      nom=value;
+                  });
+                },
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: "Nom"
+                ),
+
+              ),
+              SizedBox(height: 20,),
+              //prenom
+              TextField(
+                onChanged: (String value){
+                  setState(() {
+                      prenom=value;
+
+                  });
+                },
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: "Prenom"
+                ),
+
+              ),
+              SizedBox(height: 20,),
+              //pseudo
+              TextField(
+                onChanged: (String value){
+                  setState(() {
+                    pseudo=value;
+
+                  });
+                },
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: "Pseudo"
+                ),
+
+              ),
+              //adresse
+              SizedBox(height: 20,),
+              TextField(
+                onChanged: (String value){
+                  setState(() {
+                    adresse=value;
+
+                  });
+                },
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: "Adresse"
+                ),
+
+              ),
+              SizedBox(height: 20,),
+
+
+              CheckboxListTile(
+                title: Text('Jeux vidéos'),
+                onChanged: (bool? value){
+                  setState(() {
+                    jeuxvideo = value!;
+                  });
+                },
+                value: jeuxvideo,
+
+
+              ),
+              CheckboxListTile(
+                title: Text('lecture'),
+                onChanged: (bool? value){
+                  setState(() {
+                    lecture = value!;
+                  });
+                },
+                value: lecture,
+
+
+              ),
+              CheckboxListTile(
+                title: Text('sport'),
+                onChanged: (bool? value){
+                  setState(() {
+                    sport = value!;
+                  });
+                },
+                value: sport,
+
+
+              ),
+              CheckboxListTile(
+                title: Text('Réseaux sociaux'),
+                onChanged: (bool? value){
+                  setState(() {
+                    reseauxSociaux = value!;
+                  });
+                },
+                value: reseauxSociaux,
+
+
+              ),
+
+              ElevatedButton(
+
+
+
+                  onPressed: (){
+                    //création de la liste
+                    ajouterliste(jeuxvideo,loisirs);
+                    ajouterliste(sport,loisirs);
+                    ajouterliste(reseauxSociaux,loisirs);
+                    ajouterliste(lecture,loisirs);
+                    //créattion de la map
+                    Map<String,dynamic> map ={
+                      "nom":nom,
+                      "prenom":prenom,
+                      "adresse":adresse,
+                      "isMan":isMan,
+                      "loisirs":loisirs
+                    };
+
+                    //Enregistrement dans la base du donnée
+                    firestoreHelper().addUser(map, identifiant);
+
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (BuildContext context){
+                          return profilPage();
+                        }
+                    ));
+
+                  },
+                  child: Text('Enregistrer')
+              ),
 
             ],
           ),
+        )
 
-          //nom
-          TextField(
-            onChanged: (String value){
-              setState(() {
-
-
-              });
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                hintText: "Nom"
-            ),
-
-          ),
-          SizedBox(height: 20,),
-          //prenom
-          TextField(
-            onChanged: (String value){
-              setState(() {
-
-
-              });
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                hintText: "Prenom"
-            ),
-
-          ),
-          SizedBox(height: 20,),
-          //pseudo
-          TextField(
-            onChanged: (String value){
-              setState(() {
-
-
-              });
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                hintText: "Pseudo"
-            ),
-
-          ),
-          //adresse
-          SizedBox(height: 20,),
-          TextField(
-            onChanged: (String value){
-              setState(() {
-
-
-              });
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                hintText: "Adresse"
-            ),
-
-          ),
-          SizedBox(height: 20,),
-
-
-          CheckboxListTile(
-            title: Text('Jeux vidéos'),
-            onChanged: (bool? value){
-              setState(() {
-                jeuxvideo = value!;
-              });
-            },
-            value: jeuxvideo,
-
-
-          ),
-          CheckboxListTile(
-            title: Text('lecture'),
-            onChanged: (bool? value){
-              setState(() {
-                lecture = value!;
-              });
-            },
-            value: lecture,
-
-
-          ),
-          CheckboxListTile(
-            title: Text('sport'),
-            onChanged: (bool? value){
-              setState(() {
-                sport = value!;
-              });
-            },
-            value: sport,
-
-
-          ),
-          CheckboxListTile(
-            title: Text('Réseaux sociaux'),
-            onChanged: (bool? value){
-              setState(() {
-                reseauxSociaux = value!;
-              });
-            },
-            value: reseauxSociaux,
-
-
-          ),
-
-          ElevatedButton(
-
-
-
-              onPressed: (){
-                //création de la liste
-                ajouterliste(jeuxvideo,loisirs);
-                ajouterliste(sport,loisirs);
-                ajouterliste(reseauxSociaux,loisirs);
-                ajouterliste(lecture,loisirs);
-                //créattion de la map
-                Map<String,dynamic> map ={
-                  "nom":nom,
-                  "prenom":prenom,
-                  "adresse":adresse,
-                  "isMan":isMan,
-                  "loisirs":loisirs
-                };
-
-                //Enregistrement dans la base du donnée
-                firestoreHelper().addUser(map, identifiant);
-
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context){
-                      return profilPage();
-                    }
-                ));
-
-              },
-              child: Text('Enregistrer')
-          ),
-
-        ],
-      ),
     );
-
 
   }
   List ajouterliste(bool element, List list){

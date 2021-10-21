@@ -18,11 +18,13 @@ class Utilisateur{
     Map<String, dynamic> map = snapshot.data() as Map<String, dynamic>;
     prenom = map['prenom'];
     nom = map['nom'];
-    pseudo = map['pseudo'];
+    // pseudo = map['pseudo'];
     adresse = map['adresse'];
     loisirs = map['loisirs'];
     isMan = map['isMan'];
-    image = map['image'];
+   // image = map['image'];
   }
+
+  Utilisateur.initialize();
 
 }

@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:widget/model/Utilisateur.dart';
+import 'package:widget/model/Utilisateur.dart';
 
 class firestoreHelper{
   final authBase = FirebaseAuth.instance;
@@ -38,22 +41,23 @@ class firestoreHelper{
   addUser(Map <String,dynamic> map ,String uid){
     firestore_user.doc(uid).set(map);
 
-
   }
+/*
+  Future<String> getIdentifiant() async{
 
-  String getIdentifiant(){
-
-    String identifiant=authBase.currentUser!.uid;
+    String identifiant= await authBase.currentUser!.uid;
 
     return identifiant;
 
   }
-
-  /*
-  Future <User> getUser(String uid) async{
-
-  }
   */
+
+  Future<Utilisateur> getUtilisateur(String uid) async{
+
+    DocumentSnapshot snap = await firestore_user.doc(uid).get();
+
+    return Utilisateur(snap);
+  }
 
 
 }
